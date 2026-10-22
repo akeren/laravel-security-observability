@@ -8,9 +8,9 @@ persist events in a database outbox for HTTPS delivery. ECS output and a working
 Elasticsearch/Filebeat example are included. The package observes application actions;
 it does not enforce authorization or provide a detection engine.
 
-**Release status:** preparing `0.1.0-rc.1`, the first release candidate for integration
-testing. CI and local application integration tests have passed. Publication and
-production canary validation remain pending; this is not a stable release.
+**Release:** `0.1.0`, the initial release. Hosted CI and local application integration
+tests have passed. The API may evolve during the `0.x` series. Validate configuration
+and delivery in your deployment environment before production rollout.
 
 ## Requirements
 
@@ -22,14 +22,14 @@ See [compatibility](docs/compatibility.md) for the tested matrix.
 
 ## Installation
 
-Once a release is published:
+Install from Packagist once the package is available there:
 
 ```sh
-composer require kater/laravel-security-observability
+composer require kater/laravel-security-observability:^0.1
 php artisan vendor:publish --tag=security-observability-config
 ```
 
-Until then, install from a local checkout:
+For development, install from a local checkout:
 
 ```sh
 composer config repositories.security-observability path /absolute/path/to/laravel-security-observability
