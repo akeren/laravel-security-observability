@@ -8,9 +8,9 @@ persist events in a database outbox for HTTPS delivery. ECS output and a working
 Elasticsearch/Filebeat example are included. The package observes application actions;
 it does not enforce authorization or provide a detection engine.
 
-**Release:** `0.1.0`, the initial release. Hosted CI and local application integration
-tests have passed. The API may evolve during the `0.x` series. Validate configuration
-and delivery in your deployment environment before production rollout.
+**Release:** `0.1.1`, adding architecture regression tests without runtime API changes.
+The API may evolve during the `0.x` series. Validate configuration and delivery in
+your deployment environment before production rollout.
 
 ## Requirements
 

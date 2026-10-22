@@ -1,7 +1,7 @@
 # Security policy
 
-Version `0.1.0` is the initial release. Security fixes target the latest patch of
-the current release series, initially `0.1.x`; older minor series are not maintained.
+Security fixes target the latest patch of the current release series, `0.1.x`;
+older minor series are not maintained.
 Use the latest available patch and validate deployment-specific configuration.
 
 Operational telemetry is fail-open;
