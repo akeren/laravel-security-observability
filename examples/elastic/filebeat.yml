@@ -1,0 +1,29 @@
+filebeat.inputs:
+  - type: filestream
+    id: security-observability-ecs
+    paths: [/logs/*.jsonl]
+    prospector.scanner.fingerprint.length: 64
+    parsers:
+      - ndjson:
+          target: document
+          add_error_key: true
+    message_max_bytes: 65536
+processors:
+  - copy_fields:
+      fields:
+        - from: document.event.id
+          to: '@metadata._id'
+      fail_on_error: true
+      ignore_missing: false
+  - include_fields:
+      fields: [document]
+setup.ilm.enabled: false
+setup.template.enabled: false
+output.elasticsearch:
+  hosts: ['https://elasticsearch:9200']
+  username: elastic
+  password: '${ELASTIC_PASSWORD}'
+  ssl.certificate_authorities: [/certs/server.crt]
+  index: security-observability-collector
+  pipeline: security-observability-ecs-v1
+logging.level: warning

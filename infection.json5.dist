@@ -1,0 +1,12 @@
+{
+    "source": {"directories": ["src/Delivery"]},
+    "timeout": 15,
+    "logs": {
+        "text": "build/infection.log",
+        "summary": "build/infection-summary.log",
+        "json": "build/infection.json"
+    },
+    "minMsi": 80,
+    "minCoveredMsi": 85,
+    "mutators": {"@default": true}
+}

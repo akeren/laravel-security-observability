@@ -1,0 +1,6 @@
+{
+  "ecs": "9.5.0",
+  "mapper": "1.0.0",
+  "elasticsearch": "9.5.5",
+  "filebeat": "9.5.5"
+}

@@ -1,0 +1,7 @@
+parameters:
+    level: 5
+    # Preserve runtime checks for untrusted input and imprecise upstream PHPDoc.
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src
+    tmpDir: .phpstan.cache

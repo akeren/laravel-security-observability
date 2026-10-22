@@ -1,0 +1,99 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.4', '8.5']
+        dependencies: [baseline, latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, xml, xmlwriter, pdo_sqlite
+          tools: composer:v2
+          coverage: none
+      - run: composer validate --strict
+      - name: Resolve minimum supported Laravel version
+        if: matrix.dependencies == 'baseline'
+        run: composer update --with laravel/framework:13.31.0 --with orchestra/testbench:11.2.0 --with orchestra/testbench-core:11.4.0 --with orchestra/workbench:11.2.0 --prefer-dist --no-interaction
+      - name: Resolve latest supported dependencies
+        if: matrix.dependencies == 'latest'
+        run: composer update --prefer-dist --no-interaction
+      - run: composer check-platform-reqs
+      - run: vendor/bin/pint --test
+      - run: composer test
+      - run: composer test:discovery
+      - run: composer audit
+
+  elastic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, dom, xml, xmlwriter, pdo_sqlite
+          tools: composer:v2
+          coverage: none
+      - run: composer update --prefer-dist --no-interaction --no-progress
+      - run: sh examples/elastic/setup.sh
+      - run: composer test:elastic
+      - name: Stop integration services
+        if: always()
+        run: docker compose -f examples/elastic/compose.yml down -v
+
+  databases:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        driver: [mysql, pgsql]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, xml, xmlwriter, pdo_sqlite, pdo_mysql, pdo_pgsql
+          tools: composer:v2
+          coverage: none
+      - run: composer update --prefer-dist --no-interaction --no-progress
+      - run: docker compose -f tests/Integration/database-compose.yml up -d --wait
+      - run: composer test:database
+        env:
+          SECURITY_TEST_DB_DRIVER: ${{ matrix.driver }}
+      - name: Stop disposable databases
+        if: always()
+        run: docker compose -f tests/Integration/database-compose.yml down -v
+
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, xml, xmlwriter, pdo_sqlite
+          tools: composer:v2
+          coverage: xdebug
+      - run: composer update --prefer-dist --no-interaction --no-progress
+      - run: composer analyse
+      - run: composer test:coverage
+        env:
+          XDEBUG_MODE: coverage
+      - run: composer test:mutation
+        env:
+          XDEBUG_MODE: coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-reports
+          path: build/
+          if-no-files-found: error

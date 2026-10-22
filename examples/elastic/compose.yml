@@ -1,0 +1,37 @@
+name: security-observability-elastic
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: 'true'
+      xpack.security.http.ssl.enabled: 'true'
+      xpack.security.http.ssl.key: certs/server.key
+      xpack.security.http.ssl.certificate: certs/server.crt
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    env_file: .runtime/elastic.env
+    ports: ['127.0.0.1:19200:9200']
+    volumes:
+      - ./.runtime/certs:/usr/share/elasticsearch/config/certs:ro
+      - elastic-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -s --cacert config/certs/server.crt https://localhost:9200 | grep -q security_exception']
+      interval: 5s
+      timeout: 5s
+      retries: 60
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:9.5.5
+    user: root
+    command: ['filebeat', '-e', '--strict.perms=false']
+    env_file: .runtime/elastic.env
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./.runtime/certs:/certs:ro
+      - ./.runtime/logs:/logs:ro
+      - filebeat-data:/usr/share/filebeat/data
+volumes:
+  elastic-data:
+  filebeat-data:

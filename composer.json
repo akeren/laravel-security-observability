@@ -1,0 +1,79 @@
+{
+    "name": "kater/laravel-security-observability",
+    "description": "Laravel observability and security event telemetry for SOC integration",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kater Akeren",
+            "email": "akeren.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/promises": "^2.0.3 || ^3.0",
+        "illuminate/auth": "^13.31",
+        "illuminate/bus": "^13.31",
+        "illuminate/console": "^13.31",
+        "illuminate/contracts": "^13.31",
+        "illuminate/database": "^13.31",
+        "illuminate/events": "^13.31",
+        "illuminate/http": "^13.31",
+        "illuminate/log": "^13.31",
+        "illuminate/queue": "^13.31",
+        "illuminate/support": "^13.31",
+        "monolog/monolog": "^3.10",
+        "php": ">=8.3 <8.6",
+        "psr/http-message": "^1.0 || ^2.0"
+    },
+    "require-dev": {
+        "infection/infection": "^0.35.8",
+        "laravel/pint": "^1.32",
+        "orchestra/testbench": "^11.2",
+        "phpstan/phpstan": "^2.3.1",
+        "phpunit/phpunit": "^12.5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kater\\SecurityObservability\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kater\\SecurityObservability\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kater\\SecurityObservability\\SecurityObservabilityServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:discovery": "@php tests/Integration/discovery.php",
+        "check": [
+            "@composer validate --strict",
+            "@format:check",
+            "@analyse",
+            "@test",
+            "@test:discovery"
+        ],
+        "format": "pint",
+        "format:check": "pint --test",
+        "test:elastic": "phpunit tests/Integration/ElasticIngestionTest.php",
+        "analyse": "phpstan analyse --no-progress",
+        "test:coverage": [
+            "phpunit --coverage-clover build/coverage.xml --coverage-html build/coverage --coverage-text",
+            "@php tests/check-coverage.php"
+        ],
+        "test:mutation": "infection --threads=2 --filter=src/Delivery/DeliveryDriver.php,src/Delivery/RetryPolicy.php --show-mutations --test-framework-options=\"--testsuite Unit\"",
+        "test:database": "phpunit tests/Integration/DatabaseDeliveryTest.php"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": false
+        }
+    }
+}

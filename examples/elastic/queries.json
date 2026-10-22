@@ -1,0 +1,24 @@
+{
+  "authentication_sequence": {
+    "query": "sequence by kater.tenant.id with maxspan=5m [any where event.code == \"identity.authentication.failed\" and user.target.id == \"pseudo-user-1\"] [any where event.code == \"identity.authentication.failed\" and user.target.id == \"pseudo-user-1\"] [any where event.code == \"identity.authentication.succeeded\" and user.id == \"pseudo-user-1\"]"
+  },
+  "privilege_export": {
+    "query": "sequence by kater.tenant.id, user.id with maxspan=5m [any where event.code == \"identity.privilege.changed\"] [any where event.code == \"data.sensitive.exported\"]"
+  },
+  "credential_reuse": {
+    "query": "sequence by kater.tenant.id, kater.target.id with maxspan=5m [any where event.code == \"identity.credential.rotated\"] [any where event.code == \"identity.authentication.revoked_credential\"]"
+  },
+  "workflow": {
+    "query": {
+      "term": {
+        "kater.correlation.id": "workflow-synthetic"
+      }
+    },
+    "sort": [
+      {
+        "@timestamp": "asc"
+      }
+    ],
+    "size": 100
+  }
+}

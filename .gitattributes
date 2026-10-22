@@ -1,0 +1,18 @@
+/.github export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
+/tests export-ignore
+/phpunit.xml.dist export-ignore
+/pint.json export-ignore
+/vendor export-ignore
+/composer.lock export-ignore
+/.phpunit.cache export-ignore
+/.env export-ignore
+/.env.* export-ignore
+/.DS_Store export-ignore
+/examples/elastic/.runtime export-ignore
+
+/phpstan.neon.dist export-ignore
+/infection.json5.dist export-ignore
+/.phpstan.cache export-ignore
+/build export-ignore

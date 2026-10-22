@@ -1,0 +1,5 @@
+{
+  "settings": {
+    "index.default_pipeline": "security-observability-ecs-v1"
+  }
+}

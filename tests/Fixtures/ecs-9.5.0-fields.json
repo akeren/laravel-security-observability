@@ -1,0 +1,268 @@
+{
+    "source": "https://github.com/elastic/ecs/blob/v9.5.0/generated/ecs/ecs_flat.yml",
+    "license": "Apache-2.0",
+    "version": "9.5.0",
+    "fields": {
+        "@timestamp": {
+            "type": "date"
+        },
+        "ecs.version": {
+            "type": "keyword"
+        },
+        "event.id": {
+            "type": "keyword"
+        },
+        "event.created": {
+            "type": "date"
+        },
+        "event.kind": {
+            "type": "keyword",
+            "values": [
+                "alert",
+                "asset",
+                "enrichment",
+                "event",
+                "metric",
+                "state",
+                "pipeline_error",
+                "signal"
+            ]
+        },
+        "event.code": {
+            "type": "keyword"
+        },
+        "event.action": {
+            "type": "keyword"
+        },
+        "event.outcome": {
+            "type": "keyword",
+            "values": [
+                "failure",
+                "success",
+                "unknown"
+            ]
+        },
+        "event.module": {
+            "type": "keyword"
+        },
+        "event.dataset": {
+            "type": "keyword"
+        },
+        "event.severity": {
+            "type": "long"
+        },
+        "event.category": {
+            "type": "keyword",
+            "values": [
+                "api",
+                "authentication",
+                "configuration",
+                "database",
+                "driver",
+                "email",
+                "file",
+                "host",
+                "iam",
+                "intrusion_detection",
+                "library",
+                "malware",
+                "network",
+                "package",
+                "process",
+                "registry",
+                "session",
+                "threat",
+                "vulnerability",
+                "web"
+            ],
+            "expected_types": {
+                "api": [
+                    "access",
+                    "admin",
+                    "allowed",
+                    "change",
+                    "creation",
+                    "deletion",
+                    "denied",
+                    "end",
+                    "info",
+                    "start",
+                    "user"
+                ],
+                "authentication": [
+                    "start",
+                    "end",
+                    "info"
+                ],
+                "configuration": [
+                    "access",
+                    "change",
+                    "creation",
+                    "deletion",
+                    "info"
+                ],
+                "database": [
+                    "access",
+                    "change",
+                    "info",
+                    "error"
+                ],
+                "driver": [
+                    "change",
+                    "end",
+                    "info",
+                    "start"
+                ],
+                "email": [
+                    "info"
+                ],
+                "file": [
+                    "access",
+                    "change",
+                    "creation",
+                    "deletion",
+                    "info"
+                ],
+                "host": [
+                    "access",
+                    "change",
+                    "end",
+                    "info",
+                    "start"
+                ],
+                "iam": [
+                    "admin",
+                    "change",
+                    "creation",
+                    "deletion",
+                    "group",
+                    "info",
+                    "user"
+                ],
+                "intrusion_detection": [
+                    "allowed",
+                    "denied",
+                    "info"
+                ],
+                "library": [
+                    "start"
+                ],
+                "malware": [
+                    "info"
+                ],
+                "network": [
+                    "access",
+                    "allowed",
+                    "connection",
+                    "denied",
+                    "end",
+                    "info",
+                    "protocol",
+                    "start"
+                ],
+                "package": [
+                    "access",
+                    "change",
+                    "deletion",
+                    "info",
+                    "installation",
+                    "start"
+                ],
+                "process": [
+                    "access",
+                    "change",
+                    "end",
+                    "info",
+                    "start"
+                ],
+                "registry": [
+                    "access",
+                    "change",
+                    "creation",
+                    "deletion"
+                ],
+                "session": [
+                    "start",
+                    "end",
+                    "info"
+                ],
+                "threat": [
+                    "indicator"
+                ],
+                "vulnerability": [
+                    "info"
+                ],
+                "web": [
+                    "access",
+                    "error",
+                    "info"
+                ]
+            }
+        },
+        "event.type": {
+            "type": "keyword",
+            "values": [
+                "access",
+                "admin",
+                "allowed",
+                "change",
+                "connection",
+                "creation",
+                "deletion",
+                "denied",
+                "device",
+                "end",
+                "error",
+                "group",
+                "indicator",
+                "info",
+                "installation",
+                "protocol",
+                "start",
+                "user"
+            ]
+        },
+        "event.duration": {
+            "type": "long"
+        },
+        "log.level": {
+            "type": "keyword"
+        },
+        "service.name": {
+            "type": "keyword"
+        },
+        "service.environment": {
+            "type": "keyword"
+        },
+        "trace.id": {
+            "type": "keyword"
+        },
+        "span.id": {
+            "type": "keyword"
+        },
+        "user.id": {
+            "type": "keyword"
+        },
+        "user.target.id": {
+            "type": "keyword"
+        },
+        "related.user": {
+            "type": "keyword"
+        },
+        "source.ip": {
+            "type": "ip"
+        },
+        "related.ip": {
+            "type": "ip"
+        },
+        "http.request.id": {
+            "type": "keyword"
+        },
+        "http.request.method": {
+            "type": "keyword"
+        },
+        "http.response.status_code": {
+            "type": "long"
+        }
+    }
+}

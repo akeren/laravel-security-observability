@@ -1,0 +1,12 @@
+/vendor/
+/composer.lock
+/.phpunit.cache/
+/.env
+/.env.*
+/.DS_Store
+
+/examples/elastic/.runtime/
+
+/.phpstan.cache/
+/build/
+/infection.log

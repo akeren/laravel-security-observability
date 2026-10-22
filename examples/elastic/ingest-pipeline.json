@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "description": "Promote normalized ECS fields while retaining original timestamp precision.",
+  "processors": [
+    {
+      "script": {
+        "lang": "painless",
+        "params": {
+          "fields": [
+            "@timestamp",
+            "ecs",
+            "event",
+            "log",
+            "service",
+            "trace",
+            "span",
+            "user",
+            "related",
+            "source",
+            "http",
+            "kater"
+          ]
+        },
+        "source": "def document = ctx.remove('document'); if (document == null || !document.containsKey('@timestamp')) { throw new IllegalArgumentException('Missing ECS document timestamp'); } for (def key : params.fields) { if (document.containsKey(key)) { ctx[key] = document[key]; } }"
+      }
+    }
+  ]
+}

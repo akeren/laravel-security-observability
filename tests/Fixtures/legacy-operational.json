@@ -1,0 +1,21 @@
+{
+    "timestamp": "2026-01-01T00:00:00+00:00",
+    "event": "http.request.completed",
+    "level": "info",
+    "correlation_id": "synthetic-workflow",
+    "request_id": "synthetic-request",
+    "context": {
+        "method": "POST",
+        "response_status": 200,
+        "query": {
+            "token": "[REDACTED]",
+            "visible": "yes"
+        },
+        "headers": {
+            "authorization": "[REDACTED]"
+        },
+        "nested": {
+            "cardNumber": "[REDACTED]"
+        }
+    }
+}
