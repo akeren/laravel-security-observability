@@ -51,6 +51,7 @@
     },
     "scripts": {
         "test": "phpunit",
+        "test:architecture": "phpunit --testsuite Architecture",
         "test:discovery": "@php tests/Integration/discovery.php",
         "check": [
             "@composer validate --strict",

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add architecture tests for PSR-4 declarations, dependency boundaries, immutable events,
+  contract-based dependencies, and sanitized-event output contracts. Run them with
+  `composer test:architecture` or as part of the full test suite and CI.
+
 ## 0.1.0 — 2026-10-22
 
 Initial release. Hosted CI, local application integration tests, and the local
