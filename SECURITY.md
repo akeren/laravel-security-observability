@@ -1,6 +1,7 @@
 # Security policy
 
-This package is unreleased. No production-supported versions exist yet and no
+The first release candidate, `0.1.0-rc.1`, is being prepared for integration testing;
+publication is pending. No production-supported versions exist yet and no
 production delivery guarantees are provided. Operational telemetry is fail-open;
 optional strict security capture propagates persistence failures. Outbox capacity
 and failed delivery require monitoring. See the README and configuration for
@@ -9,7 +10,9 @@ capture coverage, failure policies, and privacy limits.
 Report suspected vulnerabilities privately to the package author, Kater Akeren,
 at akeren.dev@gmail.com (the Composer author contact). Do not open a public issue
 containing exploit details, credentials, customer data, or production logs.
-Include affected revisions, a synthetic reproduction, and the expected impact.
+Include the affected package version or commit, PHP and Laravel versions, a
+synthetic reproduction, and the expected impact. Reports concerning release
+candidates are welcome.
 
 The author has confirmed this private reporting address. Reports should remain
 private while the issue is assessed and a fix is coordinated. Security fixes and

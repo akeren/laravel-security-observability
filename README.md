@@ -8,8 +8,9 @@ persist events in a database outbox for HTTPS delivery. ECS output and a working
 Elasticsearch/Filebeat example are included. The package observes application actions;
 it does not enforce authorization or provide a detection engine.
 
-**Release status:** unreleased. Local integration and rollback have been tested;
-production canary validation and the first published version remain pending.
+**Release status:** preparing `0.1.0-rc.1`, the first release candidate for integration
+testing. CI and local application integration tests have passed. Publication and
+production canary validation remain pending; this is not a stable release.
 
 ## Requirements
 

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.1.0-rc.1 — 2026-10-22
+
+First release candidate for integration testing. Publication is pending; production
+canary validation remains outstanding.
+
 - Reject unknown delivery drivers instead of silently bypassing durable/strict capture.
 - Separate export orchestration, HTTP/Elasticsearch transports, and retry policy behind contracts.
 - Require `SanitizedEvent` at the sink boundary; custom sinks may retain a broader contravariant parameter.
